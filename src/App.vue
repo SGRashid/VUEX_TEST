@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    data() {
+      return { posts: [] };
+    },
+    async mounted() {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+        const posts = await res.json();
+        this.posts = posts;
+    },
+    components: {}
 }
 </script>
 
