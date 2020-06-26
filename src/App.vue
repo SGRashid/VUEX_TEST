@@ -16,16 +16,9 @@
 <script>
   import { mapGetters } from 'vuex';
 export default {
-    // computed: {
-    //     allPosts(){
-    //         return this.$store.getters.allPosts;
-    //     }
-    // },
     computed: mapGetters(['allPosts']),
     async mounted() {
-        const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
-        const posts = await res.json();
-        this.posts = posts;
+        this.$store.dispatch('fetchPosts');
     },
     components: {}
 }

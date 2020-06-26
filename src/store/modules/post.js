@@ -1,6 +1,16 @@
 export default {
-    actions: {},
-    mutations: {},
+    actions: {
+        async fetchPosts(ctx) {
+            const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
+            const posts = await res.json();
+            ctx.commit('updatePosts', posts);
+        }
+    },
+    mutations: {
+        updatePosts(state, posts) {
+            state.posts = posts;
+        }
+    },
     state: {
         posts: []
     },
