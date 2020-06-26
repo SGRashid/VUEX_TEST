@@ -1,7 +1,8 @@
 <template>
-  <div id="app" class="d-flex flex-column justify-content-start align-items-center">
+  <div id="app" class="d-flex flex-column justify-content-start align-items-center p-md-0 p-3">
     <h1>count of posts: {{postsCount}}</h1>
-    <div class="post card w-50 mb-3"
+    <PostForm />
+    <div class="post card col-md-6 mb-3"
          v-for="post in allPosts"
          :key="post.id"
     >
@@ -15,14 +16,16 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import PostForm from './components/PostForm';
+
 export default {
     computed: mapGetters(['allPosts', 'postsCount']),
     methods: mapActions(['fetchPosts']),
     async mounted() {
         this.fetchPosts(5);
     },
-    components: {}
+    components: { PostForm }
 }
 </script>
 
@@ -36,7 +39,7 @@ export default {
   margin-top: 60px;
 }
   .post {
-    max-width: 700px !important;
-    min-width: 400px !important;
+    /*max-width: 700px !important;*/
+    /*min-width: 400px !important;*/
   }
 </style>
