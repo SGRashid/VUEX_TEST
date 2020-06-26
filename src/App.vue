@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="d-flex flex-column justify-content-start align-items-center">
     <div class="post card w-50 mb-3"
-         v-for="post in posts"
+         v-for="post in allPosts"
          :key="post.id"
     >
       <div class="card-body">
@@ -14,11 +14,14 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
 export default {
-    name: 'App',
-    data() {
-      return { posts: [] };
-    },
+    // computed: {
+    //     allPosts(){
+    //         return this.$store.getters.allPosts;
+    //     }
+    // },
+    computed: mapGetters(['allPosts']),
     async mounted() {
         const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
         const posts = await res.json();
