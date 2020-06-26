@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="d-flex flex-column justify-content-start align-items-center">
+    <h1>count of posts: {{postsCount}}</h1>
     <div class="post card w-50 mb-3"
          v-for="post in allPosts"
          :key="post.id"
@@ -14,11 +15,12 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 export default {
-    computed: mapGetters(['allPosts']),
+    computed: mapGetters(['allPosts', 'postsCount']),
+    methods: mapActions(['fetchPosts']),
     async mounted() {
-        this.$store.dispatch('fetchPosts');
+        this.fetchPosts(5);
     },
     components: {}
 }
