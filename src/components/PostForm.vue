@@ -1,5 +1,7 @@
 <template>
-    <form class="col-md-6">
+    <form class="col-md-6"
+          @submit.prevent="submit"
+    >
         <div class="form-group d-flex flex-column align-items-start">
             <label for="post-title">post title</label>
             <input type="text"
@@ -17,7 +19,7 @@
                       class="form-control"
                       placeholder="(^_^) write here"
                       v-model="body"
-            />
+            ></textarea>
             <button type="submit"
                     class="btn btn-primary mt-3"
             >
@@ -28,15 +30,27 @@
 </template>
 
 <script>
-    export default {
-        name: "PostForm",
-        date() {
-            return {
-                title: '',
-                body: ''
-            }
+import { mapMutations } from 'vuex';
+export default {
+    name: "PostForm",
+    data() {
+        return {
+            title: '',
+            body: ''
+        }
+    },
+    methods: {
+        ...mapMutations(['createPost']),
+        submit() {
+            this.createPost({
+                title: this.title,
+                body: this.body,
+                id: Date.now()
+            });
+            this.title = this.body = '';
         }
     }
+};
 </script>
 
 <style scoped>
