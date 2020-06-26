@@ -22,6 +22,7 @@
             ></textarea>
             <button type="submit"
                     class="btn btn-primary mt-3"
+                    :disabled="!title || !body"
             >
                 Create Post
             </button>
